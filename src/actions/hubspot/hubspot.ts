@@ -148,6 +148,8 @@ export class HubspotAction extends Hub.Action {
     let fieldset: Hub.Field[] = []
     const errors: Error[] = []
 
+    console.log(`Execute ${this.call} with fields: `, fieldset)
+
     try {
       await request.streamJsonDetail({
         onFields: (fields) => {
@@ -185,6 +187,8 @@ export class HubspotAction extends Hub.Action {
           }
         },
       })
+
+      console.log("Sending to hubspot batch: ", batchUpdateObjects)
 
       let hubspotBatchUpdateRequest:
         | Promise<BatchUpdatePromiseResponse>
