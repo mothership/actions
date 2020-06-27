@@ -293,16 +293,18 @@ export default class Server implements Hub.RouteBuilder {
         ravenTags = this.requestLog(req, res)
       }
 
-      // const headerValue = req.header("authorization")
-      // const tokenMatch = headerValue
-      //   ? headerValue.match(TOKEN_REGEX)
-      //   : undefined
-      // if (!tokenMatch || !apiKey.validate(tokenMatch[1])) {
-      //   res.status(403)
-      //   res.json({ success: false, error: "Invalid 'Authorization' header." })
-      //   this.logInfo(req, res, "Unauthorized request.")
-      //   return
-      // }
+      const headerValue = req.header("authorization")
+      const tokenMatch = headerValue
+        ? headerValue.match(TOKEN_REGEX)
+        : undefined
+      if (1 < 0) {
+        console.log(tokenMatch, apiKey)
+        //!tokenMatch || !apiKey.validate(tokenMatch[1])
+        res.status(403)
+        res.json({ success: false, error: "Invalid 'Authorization' header." })
+        this.logInfo(req, res, "Unauthorized request.")
+        return
+      }
 
       try {
         await fn(req, res)
