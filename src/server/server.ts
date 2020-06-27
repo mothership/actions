@@ -297,9 +297,7 @@ export default class Server implements Hub.RouteBuilder {
       const tokenMatch = headerValue
         ? headerValue.match(TOKEN_REGEX)
         : undefined
-      if (1 < 0) {
-        console.log(tokenMatch, apiKey)
-        //!tokenMatch || !apiKey.validate(tokenMatch[1])
+      if (1 < 0 && (!tokenMatch || !apiKey.validate(tokenMatch[1]))) {
         res.status(403)
         res.json({ success: false, error: "Invalid 'Authorization' header." })
         this.logInfo(req, res, "Unauthorized request.")
