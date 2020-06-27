@@ -112,7 +112,9 @@ export default class Server implements Hub.RouteBuilder {
     this.app.use(express.static("public"))
 
     this.route("/", async (req, res) => {
+      console.log("Hit the route with: ", req)
       const request = Hub.ActionRequest.fromRequest(req)
+      console.log(request)
       const version = request.lookerVersion ? request.lookerVersion : "5.5.0"
       if (!this.actionList[version]) {
         const actions = await Hub.allActions({
@@ -305,6 +307,7 @@ export default class Server implements Hub.RouteBuilder {
       }
 
       try {
+        console.log("About to hit the callback")
         await fn(req, res)
       } catch (e) {
         this.logError(req, res, "Error on request")
